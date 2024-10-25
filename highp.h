@@ -1,5 +1,7 @@
 #ifndef _HIGHP_H
 #define _HIGHP_H
+#include <iostream>
+#include <vector>
 
 namespace highpmath{
     
@@ -9,13 +11,12 @@ namespace highpmath{
     public:
         Highp();//will form a standard num with a max digit num of 1e9.
         Highp(short &_base);//specify a base
-    private:
-        int digitNum;
-        short *num[0];
-        short base;
-        bool _IS_NEGA;
 
-        
+        //basic operation
+        short getBase();
+        int getDigit();
+        void setBase(short &_base);
+        bool _NEGA_CHECK();//true for negative
 
         //operator =
         Highp operator=(Highp &_num);
@@ -71,6 +72,48 @@ namespace highpmath{
         friend Highp operator/(long &_num, Highp &_selfNum);
         Highp operator/(long long &_num);
         friend Highp operator/(long long &_num, Highp &_selfNum);
+
+        //operator []
+        short operator[](int &_num);
+
+        //operator iostream
+        friend std::ostream &operator<<(std::ostream &output, const Highp &_num);
+        friend std::istream &operator>>(std::istream &input, Highp &_num);
+
+        //operator -num
+        Highp operator-();
+
+        //operator</>
+        bool operator<(const Highp &_num);
+        bool operator>(const Highp &_num);
+
+        //operator ++ --
+        Highp operator++();
+        Highp operator++(int);
+        Highp operator--();
+        Highp operator--(int);
+
+        //operator +=
+        //TODO
+        
+        //operator -=
+        //TODO
+
+        //operator *=
+        //TODO
+
+        //operator /=
+        //TODO
+    
+    private:
+        int digitNum;
+        std::vector<short> num;
+        short base;
+        bool _IS_NEGA;
+
+        
+
+        
     };
 
     
